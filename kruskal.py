@@ -10,11 +10,11 @@ class Graph(object):
    def find(self, root, i):
        if root[i] == i:
            return i
-       print(i, root[i])
+       #print(i, root[i])
        return self.find(root, root[i])
   
    def union(self, root, rank, x, y):
-       print(f"root: {root}, rank: {rank}")
+       #print(f"root: {root}, rank: {rank}")
        xroot = self.find(root, x)
        yroot = self.find(root, y)
        if rank[xroot] < rank[yroot]:
@@ -24,7 +24,7 @@ class Graph(object):
        else:
            root[yroot] = xroot
            rank[xroot] += 1
-       print(f"root: {root}, rank: {rank}")
+       #print(f"root: {root}, rank: {rank}")
   
    
    def kruskals(self):
@@ -47,7 +47,7 @@ class Graph(object):
            i = i + 1
            x = self.find(root, u)
            y = self.find(root, v)
-           print(f"x, y: {x}, {y}")
+           #print(f"x, y: {x}, {y}")
            if x != y:
                e = e + 1
                result.append([u, v, w])
@@ -55,3 +55,22 @@ class Graph(object):
  
        for u, v, w in result:
            print(f'{u} - {v}: {w}')
+
+
+g = Graph(6)
+g.add_edge(0, 1, 4)
+g.add_edge(0, 2, 4)
+g.add_edge(1, 2, 2)
+g.add_edge(1, 0, 4)
+g.add_edge(2, 0, 4)
+g.add_edge(2, 1, 2)
+g.add_edge(2, 3, 3)
+g.add_edge(2, 5, 2)
+g.add_edge(2, 4, 4)
+g.add_edge(3, 2, 3)
+g.add_edge(3, 4, 3)
+g.add_edge(4, 2, 4)
+g.add_edge(4, 3, 3)
+g.add_edge(5, 2, 2)
+g.add_edge(5, 4, 3)
+g.kruskals()
